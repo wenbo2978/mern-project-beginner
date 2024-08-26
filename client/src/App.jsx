@@ -1,10 +1,22 @@
 import React from 'react'
+import {Routes, Route, BrowserRouter} from "react-router-dom"
+import Home from './pages/Home.jsx'
+import About from './pages/About.jsx'
+import AddBlog from './pages/AddBlog.jsx'
+import Blog from './pages/Blog.jsx'
+import Header from './component/Header.jsx'
 
 const App = () => {
   return (
-    <div className='text-red-200'>
-      Hello
-    </div>
+    <BrowserRouter>
+      <Header/>
+      <Routes>
+        <Route path='/' element={<Home/>}/>
+        <Route path='/about' element={<About/>}/>
+        <Route path='/add' element={<AddBlog/>}/>
+        <Route path='/blog' element={<Blog/>}/>
+      </Routes>
+    </BrowserRouter>
   )
 }
 
