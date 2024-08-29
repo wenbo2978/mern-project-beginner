@@ -24,7 +24,7 @@ app.get("/test", (req, res) => {
   console.log("works");
 })
 
-app.post('/add', async (req, res) => {
+app.post('/api/add', async (req, res) => {
   try{
     const {title, body} = req.body;
     //console.log(title);
@@ -37,11 +37,13 @@ app.post('/add', async (req, res) => {
   }
 })
 
-app.get('/getAll', async (req, res) => {
+app.get('/api/getAll', async (req, res) => {
   try{
     const data = await Blog.find();
+    //console.log(data);
     res.json(data);
   }catch(err){
+    //console.log('err');
     res.json(err);
   }
 })
