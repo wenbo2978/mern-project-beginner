@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import BlogCard from '../component/BlogCard';
 
 const Home = () => {
   const [error, setError] = useState(false);
@@ -33,10 +34,10 @@ const Home = () => {
 
 
   return (
-    <div>
+    <div className='flex gap-3 p-2 flex-wrap'>
       {
         blogList && blogList.length > 0 && blogList.map((blog, _)=>(
-          <div>{blog.title}</div>
+          <BlogCard key={blog._id} id={blog._id} blog={blog} />
         ))
       }
 
