@@ -24,6 +24,19 @@ const Home = () => {
     getAllBlogs();
   }, []);
 
+  const handleDelete = async (id) => {
+    //console.log(id);
+    try{
+      await fetch(`/api/delete/${id}`, {
+        method: "DELETE"
+      });
+      setBlogList(blogList.filter((b)=>b._id !== id));
+    }catch(err){
+      alert(err);
+    }
+  }
+
+
   if(loading){
     return <p className='font-bold text-3xl p-5'>Loading...</p>
   }
@@ -37,7 +50,7 @@ const Home = () => {
     <div className='flex gap-3 p-2 flex-wrap'>
       {
         blogList && blogList.length > 0 && blogList.map((blog, _)=>(
-          <BlogCard key={blog._id} id={blog._id} blog={blog} />
+          <BlogCard key={blog._id} id={blog._id} blog={blog} handleDelete={handleDelete} />
         ))
       }
 

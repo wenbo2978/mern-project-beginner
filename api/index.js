@@ -47,3 +47,15 @@ app.get('/api/getAll', async (req, res) => {
     res.json(err);
   }
 })
+
+app.delete('/api/delete/:id', async (req, res) => {
+  try{
+    const blog = await Blog.findById(req.params.id);
+    if(!blog)
+      return res.json('no data');
+    await Blog.findByIdAndDelete(req.params.id);
+    res.json('ok');
+  }catch(err){
+    res.json(err);
+  }
+})
