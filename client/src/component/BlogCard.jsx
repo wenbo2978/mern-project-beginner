@@ -1,10 +1,10 @@
 import React from 'react'
-import { Navigate } from 'react-router-dom';
+import { Link } from 'react-router-dom'
 
 export default function BlogCard({blog, handleDelete}) {
   return (
-    <>
-     <div className='border p-3 rounded-md sm:w-[300px] sm:h-[200px] flex flex-col relative'>
+    <Link to={`/blog/${blog._id}`}>
+     <div className='border p-3 rounded-md sm:w-[300px] sm:h-[200px] flex flex-col relative cursor-pointer'>
         <p className='font-semibold text-xl'>{blog.title}</p>
         <p className='text-slate-500 line-clamp-5'>{blog.body[0]}</p>
         <div className='flex flex-wrap justify-evenly absolute bottom-1 right-0 left-0'>
@@ -14,7 +14,7 @@ export default function BlogCard({blog, handleDelete}) {
           </svg>
 
           </button>
-          <button>
+          <button to={'/blog'}>
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
             <path strokeLinecap="round" strokeLinejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L6.832 19.82a4.5 4.5 0 0 1-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 0 1 1.13-1.897L16.863 4.487Zm0 0L19.5 7.125" />
           </svg>
@@ -22,6 +22,6 @@ export default function BlogCard({blog, handleDelete}) {
           </button>
         </div>
       </div> 
-    </>
+    </Link>
   )
 }

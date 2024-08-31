@@ -50,7 +50,7 @@ const Home = () => {
     <div className='flex gap-3 p-2 flex-wrap'>
       {
         blogList && blogList.length > 0 && blogList.map((blog, _)=>(
-          <BlogCard key={blog._id} id={blog._id} blog={blog} handleDelete={handleDelete} />
+          <BlogCard key={blog._id} id={blog._id} blog={blog} handleDelete={handleDelete}/>
         ))
       }
 
