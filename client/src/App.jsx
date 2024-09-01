@@ -5,6 +5,7 @@ import About from './pages/About.jsx'
 import AddBlog from './pages/AddBlog.jsx'
 import Blog from './pages/Blog.jsx'
 import Header from './component/Header.jsx'
+import EditBlog from './pages/EditBlog.jsx'
 
 const App = () => {
   return (
@@ -15,6 +16,7 @@ const App = () => {
         <Route path='/about' element={<About/>}/>
         <Route path='/add' element={<AddBlog/>}/>
         <Route path='/blog/:id' element={<Blog/>}/>
+        <Route path='/editBlog/:id' element={<EditBlog/>}/>
       </Routes>
     </BrowserRouter>
   )

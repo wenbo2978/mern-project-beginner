@@ -68,3 +68,23 @@ app.get('/api/getBlog/:id', async (req, res) => {
     res.json(err);
   }
 })
+
+app.post('/api/updateBlog/:id', async (req, res) => {
+  try{
+    const blog = await Blog.findById(req.params.id);
+    const {title, body} = req.body;
+    if(!blog)
+      return res.json('no data');
+    const newBlod = await Blog.findByIdAndUpdate(
+      req.params.id,
+      {
+        title,
+        body
+      },
+      {new: true}
+    );
+    res.json('ok');
+  }catch(err){
+    res.json(err);
+  }
+})

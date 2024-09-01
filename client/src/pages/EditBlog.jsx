@@ -1,12 +1,38 @@
-import React, { useState } from 'react'
-import { Navigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react'
+import { Navigate, useParams } from 'react-router-dom';
 
-const AddBlog = () => {
+const EditBlog = () => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState();
   const [contentList, setContentList] = useState([]);
   const [error, setError] = useState(false);
   const [redirect, setRedirect] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const params = useParams();
+  useEffect(()=>{
+    setLoading(true);
+    const id = params.id;
+    const getBlogById = async () => {
+      try{
+        const res = await fetch(`/api/getBlog/${id}`, {
+          method: 'GET'
+        })
+        const data = await res.json();
+        //console.log(data);
+        setLoading(false);
+        const {title, body} = data;
+        setTitle(title);
+        setContentList(body);
+      }catch(err){
+        setLoading(false);
+        setError(err);
+      }
+    }
+    getBlogById();
+  }, [])
+  if(loading){
+    return <p className='text-3xl font-bold p-3'>Loading...</p>
+  }
   const handleAddContent = () => {
     setContentList([...contentList, content]);
     setContent('');
@@ -23,7 +49,7 @@ const AddBlog = () => {
     }else{
       setError(false);
       try{
-        const res = await fetch('/api/add', {
+        const res = await fetch(`/api/updateBlog/${params.id}`, {
           method: 'post',
           headers: {
             'Content-Type': "application/json",
@@ -55,10 +81,11 @@ const AddBlog = () => {
     <div className='flex flex-row p-3 mx-auto max-w-3xl gap-2 mt-10 m-5'>
       <div className='w-full border rounded-lg p-2'>
         <form onSubmit={handleSubmit}>
-          <button className='bg-green-600 w-[200px] h-[50px] rounded-lg text-white font-bold text-2xl'>Post</button>
+          <button className='bg-green-600 w-[200px] h-[50px] rounded-lg text-white font-bold text-2xl'>Update</button>
           <div className='flex flex-col'>
             <span className='mt-2 font-semibold text-lg'>Title:</span>
             <input 
+              value={title}
               type='text' 
               placeholder='title...'
               className='border rounded-lg h-[35px] p-2 text-lg mt-2'
@@ -109,4 +136,4 @@ const AddBlog = () => {
   )
 }
 
-export default AddBlog
+export default EditBlog
