@@ -6,7 +6,7 @@ export default function BlogCard({blog, handleDelete}) {
     <>
      <div className='border p-3 rounded-md sm:w-[300px] sm:h-[200px] flex flex-col relative'>
         <Link to={`/blog/${blog._id}`}>
-          <p className='font-semibold text-xl'>{blog.title}</p>
+          <p className='font-semibold text-xl line-clamp-1'>{blog.title}</p>
           <p className='text-slate-500 line-clamp-5'>{blog.body[0]}</p>
         </Link>
       
